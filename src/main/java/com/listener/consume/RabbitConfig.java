@@ -39,13 +39,13 @@ public class RabbitConfig {
   }
 
   @Bean
-  public Queue messageSearchDeadLetterQueue() {
+  public Queue messageDeadQueue() {
     Map<String, Object> args = new HashMap<>();
     return new Queue(queueDl, true, false, false, args);
   }
 
   @Bean
-  public Queue messageProfileQueue() {
+  public Queue messageQueue() {
     Map<String, Object> args = new HashMap<>();
     // The default exchange
     args.put(X_DEAD_LETTER_EXCHANGE, "");
@@ -56,7 +56,7 @@ public class RabbitConfig {
   }
 
   @Bean
-  Binding bindingDoctorProfileQueue() {
-    return BindingBuilder.bind(messageProfileQueue()).to(messageExchange()).with(bindKey);
+  Binding bindingQueue() {
+    return BindingBuilder.bind(messageQueue()).to(messageExchange()).with(bindKey);
   }
 }
